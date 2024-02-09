@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="text_color" format="reference" />
+    <attr name="text_description_color" format="reference" />
+    <attr name="screen_background_color" format="reference" />
+    <attr name="black_universal" format="reference" />
+    <attr name="white_universal" format="reference" />
+    <attr name="blue" format="reference" />
+    <attr name="light_blue" format="reference" />
+</resources>
