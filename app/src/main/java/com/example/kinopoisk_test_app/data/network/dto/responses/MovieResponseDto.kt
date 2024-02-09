@@ -1,4 +1,4 @@
-package com.example.kinopoisk_test_app.data.dto.responses
+package com.example.kinopoisk_test_app.data.network.dto.responses
 
 import com.google.gson.annotations.SerializedName
 
