@@ -34,7 +34,7 @@ class MovieDtoConverter {
             return EMPTY_PARAM
         }
         val genresString = StringBuilder("")
-        genres.forEach { genresString.append("+${it.genreName}, ") }
+        genres.forEach { genresString.append("+${it.genre}, ") }
         return genresString.toString()
     }
 
