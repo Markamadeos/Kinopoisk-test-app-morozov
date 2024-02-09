@@ -1,8 +1,8 @@
-package com.example.kinopoisk_test_app.data.converters
+package com.example.kinopoisk_test_app.data.network.converters
 
-import com.example.kinopoisk_test_app.data.dto.responses.CountryDto
-import com.example.kinopoisk_test_app.data.dto.responses.GenreDto
-import com.example.kinopoisk_test_app.data.dto.responses.MovieResponseDto
+import com.example.kinopoisk_test_app.data.network.dto.responses.CountryDto
+import com.example.kinopoisk_test_app.data.network.dto.responses.GenreDto
+import com.example.kinopoisk_test_app.data.network.dto.responses.MovieResponseDto
 import com.example.kinopoisk_test_app.domian.models.Movie
 
 class MovieDtoConverter {

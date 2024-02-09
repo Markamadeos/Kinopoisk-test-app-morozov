@@ -1,6 +1,8 @@
 package com.example.kinopoisk_test_app.di
 
-import com.example.kinopoisk_test_app.data.NetworkClient
+import androidx.room.Room
+import com.example.kinopoisk_test_app.data.db.AppDataBase
+import com.example.kinopoisk_test_app.data.network.NetworkClient
 import com.example.kinopoisk_test_app.data.network.api.KinopoiskApi
 import com.example.kinopoisk_test_app.data.network.impl.RetrofitNetworkClient
 import com.example.kinopoisk_test_app.util.BASE_URL
@@ -24,4 +26,9 @@ val dataModule = module {
     }
 
     factory { Gson() }
+
+    single {
+        Room.databaseBuilder(androidContext(), AppDataBase::class.java, "database.db")
+            .build()
+    }
 }

@@ -1,11 +1,11 @@
 package com.example.kinopoisk_test_app.data.network.impl
 
 import android.content.Context
-import com.example.kinopoisk_test_app.data.NetworkClient
-import com.example.kinopoisk_test_app.data.dto.requests.MovieRequest
-import com.example.kinopoisk_test_app.data.dto.requests.MoviesSearchRequest
-import com.example.kinopoisk_test_app.data.dto.responses.MovieResponseDto
-import com.example.kinopoisk_test_app.data.dto.responses.MoviesResponseDto
+import com.example.kinopoisk_test_app.data.network.NetworkClient
+import com.example.kinopoisk_test_app.data.network.dto.requests.MovieRequest
+import com.example.kinopoisk_test_app.data.network.dto.requests.MoviesSearchRequest
+import com.example.kinopoisk_test_app.data.network.dto.responses.MovieResponseDto
+import com.example.kinopoisk_test_app.data.network.dto.responses.MoviesResponseDto
 import com.example.kinopoisk_test_app.data.network.api.KinopoiskApi
 import com.example.kinopoisk_test_app.util.isConnected
 import kotlinx.coroutines.Dispatchers

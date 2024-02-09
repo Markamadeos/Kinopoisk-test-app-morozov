@@ -1,7 +1,7 @@
 package com.example.kinopoisk_test_app.data.network.api
 
-import com.example.kinopoisk_test_app.data.dto.responses.MovieResponseDto
-import com.example.kinopoisk_test_app.data.dto.responses.MoviesResponseDto
+import com.example.kinopoisk_test_app.data.network.dto.responses.MovieResponseDto
+import com.example.kinopoisk_test_app.data.network.dto.responses.MoviesResponseDto
 import retrofit2.http.GET
 import retrofit2.http.Headers
 import retrofit2.http.Path
