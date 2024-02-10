@@ -6,4 +6,7 @@
     <string name="popular_text">favorite</string>
     <string name="no_internet">Произошла ошибка при загрузке данных,\nпроверьте подключение к сети</string>
     <string name="server_error">Не найдено</string>
+    <string name="popular_header">Популярное</string>
+    <string name="search_hint">Поиск</string>
+    <string name="repeat">Повторить</string>
 </resources>
