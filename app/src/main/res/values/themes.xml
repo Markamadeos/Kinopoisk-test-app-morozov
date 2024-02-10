@@ -8,7 +8,7 @@
         <item name="white_universal">@color/white</item>
         <item name="blue">@color/blue</item>
         <item name="light_blue">@color/light_blue</item>
-        <item name="android:statusBarColor">@color/white</item>
+        <item name="android:statusBarColor">@color/blue</item>
     </style>
 
     <style name="Theme.Kinopoisktestapp" parent="Base.Theme.Kinopoisktestapp" />

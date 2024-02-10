@@ -11,4 +11,6 @@
     <string name="repeat">Повторить</string>
     <string name="genre_label">Жанры: </string>
     <string name="country_label">Страна: </string>
+    <string name="favorite_header">Избранное</string>
+    <string name="nothing_found_favorites">Пока вы ничего не добавили в избранное</string>
 </resources>
