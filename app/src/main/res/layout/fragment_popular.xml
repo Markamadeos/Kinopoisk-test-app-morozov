@@ -41,9 +41,10 @@
 
     <EditText
         android:id="@+id/et_search_query"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_20dp"
+        android:layout_marginEnd="@dimen/_16dp"
         android:background="@android:color/transparent"
         android:ellipsize="end"
         android:hint="@string/search_hint"
@@ -63,7 +64,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="@dimen/_100dp" />
+        app:layout_constraintGuide_begin="@dimen/_42dp" />
 
     <ProgressBar
         android:id="@+id/pb_loading"
@@ -150,6 +151,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/top_guideline"
+        app:layout_constraintVertical_bias="0"
         tools:listitem="@layout/movie_list_item" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
