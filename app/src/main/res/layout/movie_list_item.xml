@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:cardCornerRadius="@dimen/_16dp"
-    app:cardElevation="@dimen/_12dp"
+    app:cardElevation="@dimen/_4dp"
     app:cardUseCompatPadding="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -56,6 +56,7 @@
             android:layout_height="@dimen/_18dp"
             android:layout_marginEnd="@dimen/_16dp"
             android:src="@drawable/ic_star"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="@id/tv_movie_title"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/tv_movie_title" />
