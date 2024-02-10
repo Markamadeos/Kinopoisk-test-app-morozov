@@ -9,17 +9,15 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface KinopoiskApi {
-
     @Headers("x-api-key: $API_TOKEN")
-    @GET("/api/v2.2/films/top?type=TOP_100_POPULAR_FILMS")
+    @GET("api/v2.2/films/collections?type=TOP_POPULAR_ALL")
     suspend fun getAllMovies(): MoviesResponseDto
 
     @Headers("x-api-key: $API_TOKEN")
-    @GET("/api/v2.2/films/top/{id}")
+    @GET("api/v2.2/films/top/{id}")
     suspend fun getMovieById(@Path("id") movieId: String): MovieResponseDto
 
-
     @Headers("x-api-key: $API_TOKEN")
-    @GET("/api/v2.2/films/top")
+    @GET("api/v2.2/films")
     suspend fun searchMovies(@Query("keyword") query: String): MoviesResponseDto
 }

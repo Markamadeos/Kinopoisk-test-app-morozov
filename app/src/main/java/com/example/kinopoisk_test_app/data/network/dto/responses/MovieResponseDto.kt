@@ -3,7 +3,7 @@ package com.example.kinopoisk_test_app.data.network.dto.responses
 import com.google.gson.annotations.SerializedName
 
 data class MovieResponseDto(
-    @SerializedName("filmId")
+    @SerializedName("kinopoiskId")
     val id: String,
     @SerializedName("nameRu")
     val name: String?,

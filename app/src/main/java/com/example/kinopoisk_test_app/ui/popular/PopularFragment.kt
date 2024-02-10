@@ -65,6 +65,13 @@ class PopularFragment : Fragment() {
                 btnBack.isVisible = true
                 etSearchQuery.requestFocus()
             }
+            btnInternetError.setOnClickListener {
+                if (etSearchQuery.text.isNullOrEmpty()) {
+                    viewModel.getPopularMovies()
+                } else {
+                    viewModel.debounceSearch(etSearchQuery.toString())
+                }
+            }
             rvFilms.adapter = moviesAdapter
         }
     }

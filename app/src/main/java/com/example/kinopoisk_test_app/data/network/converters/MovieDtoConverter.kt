@@ -26,7 +26,8 @@ class MovieDtoConverter {
         }
         val countriesString = StringBuilder("")
         countries.forEach { countriesString.append("${it.country}, ") }
-        return countriesString.toString().substring(FIRST_POSITION_INDEX, countriesString.length - 2)
+        return countriesString.toString()
+            .substring(FIRST_POSITION_INDEX, countriesString.length - 2)
     }
 
     private fun getGenres(genres: List<GenreDto>?): String {
