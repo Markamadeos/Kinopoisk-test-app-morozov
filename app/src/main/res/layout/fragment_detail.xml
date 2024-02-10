@@ -34,7 +34,7 @@
             android:layout_width="@dimen/_100dp"
             android:layout_height="@dimen/_100dp"
             android:src="@drawable/ic_error"
-            android:visibility="visible"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -83,8 +83,7 @@
         android:background="@drawable/rounded_bottom_sheet"
         android:orientation="vertical"
         android:paddingHorizontal="@dimen/_32dp"
-        app:behavior_hideable="true"
-        app:behavior_peekHeight="@dimen/_300dp"
+        app:behavior_peekHeight="@dimen/_200dp"
         app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
         tools:visibility="visible">
 

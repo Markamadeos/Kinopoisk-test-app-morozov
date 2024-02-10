@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.example.kinopoisk_test_app.R
 import com.example.kinopoisk_test_app.databinding.FragmentDetailBinding
 import com.example.kinopoisk_test_app.domian.models.Movie
 import com.example.kinopoisk_test_app.presentation.models.DetailScreenState
@@ -69,7 +70,7 @@ class DetailFragment : Fragment() {
 
     private fun showContent(movie: Movie) {
         with(binding) {
-            //bsMovieDescription.isVisible = true
+            bsMovieDescription.isVisible = true
             ivCover.isVisible = true
             tvInternetError.isVisible = false
             ivInternetError.isVisible = false
@@ -88,7 +89,7 @@ class DetailFragment : Fragment() {
 
     private fun showLoading() {
         with(binding) {
-           // bsMovieDescription.isVisible = false
+            bsMovieDescription.isVisible = false
             ivCover.isVisible = false
             tvInternetError.isVisible = false
             ivInternetError.isVisible = false
