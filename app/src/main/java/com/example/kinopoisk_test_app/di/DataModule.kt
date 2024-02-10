@@ -4,7 +4,10 @@ import androidx.room.Room
 import com.example.kinopoisk_test_app.data.db.AppDataBase
 import com.example.kinopoisk_test_app.data.network.NetworkClient
 import com.example.kinopoisk_test_app.data.network.api.KinopoiskApi
+import com.example.kinopoisk_test_app.data.network.converters.MovieDtoConverter
 import com.example.kinopoisk_test_app.data.network.impl.RetrofitNetworkClient
+import com.example.kinopoisk_test_app.data.network.impl.SearchRepositoryImpl
+import com.example.kinopoisk_test_app.domian.api.SearchRepository
 import com.example.kinopoisk_test_app.util.BASE_URL
 import com.google.gson.Gson
 import org.koin.android.ext.koin.androidContext
@@ -30,5 +33,11 @@ val dataModule = module {
     single {
         Room.databaseBuilder(androidContext(), AppDataBase::class.java, "database.db")
             .build()
+    }
+
+    factory { MovieDtoConverter() }
+
+    single<SearchRepository> {
+        SearchRepositoryImpl(converter = get(), networkClient = get())
     }
 }
