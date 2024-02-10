@@ -44,6 +44,7 @@ class PopularFragment : Fragment() {
         }
         setClickDebounce()
         bind()
+        viewModel.getPopularMovies()
     }
 
     private fun bind() {
@@ -84,31 +85,71 @@ class PopularFragment : Fragment() {
     private fun updateScreen(state: PopularScreenState) {
         when (state) {
             is PopularScreenState.Loading -> showLoading()
-            is PopularScreenState.Content -> showContent()
-            is PopularScreenState.Empty -> showEmptyState()
-            is PopularScreenState.InternetError -> showInternetError()
-            is PopularScreenState.ServerError -> showServerError()
+            is PopularScreenState.Content -> showContent(state.movies)
+            is PopularScreenState.Empty -> showEmptyState(state.message)
+            is PopularScreenState.InternetError -> showInternetError(state.message)
+            is PopularScreenState.ServerError -> showServerError(state.message)
         }
     }
 
-    private fun showServerError() {
-        TODO("Not yet implemented")
+    private fun showServerError(message: Int) {
+        with(binding) {
+            pbLoading.isVisible = false
+            tvInternetError.isVisible = true
+            tvServerError.isVisible = false
+            rvFilms.isVisible = false
+            ivInternetError.isVisible = true
+            btnInternetError.isVisible = true
+            tvInternetError.text = getString(message)
+        }
     }
 
-    private fun showInternetError() {
-        TODO("Not yet implemented")
+    private fun showInternetError(message: Int) {
+        with(binding) {
+            pbLoading.isVisible = false
+            tvInternetError.isVisible = true
+            tvServerError.isVisible = false
+            rvFilms.isVisible = false
+            ivInternetError.isVisible = true
+            btnInternetError.isVisible = true
+            tvInternetError.text = getString(message)
+        }
     }
 
-    private fun showEmptyState() {
-        TODO("Not yet implemented")
+    private fun showEmptyState(message: Int) {
+        with(binding) {
+            pbLoading.isVisible = false
+            tvInternetError.isVisible = false
+            tvServerError.isVisible = true
+            rvFilms.isVisible = false
+            ivInternetError.isVisible = false
+            btnInternetError.isVisible = false
+            tvServerError.text = getString(message)
+        }
     }
 
-    private fun showContent() {
-        TODO("Not yet implemented")
+    private fun showContent(movies: List<Movie>) {
+        with(binding) {
+            pbLoading.isVisible = false
+            tvInternetError.isVisible = false
+            tvServerError.isVisible = false
+            rvFilms.isVisible = true
+            ivInternetError.isVisible = false
+            btnInternetError.isVisible = false
+            moviesAdapter.clearData()
+            moviesAdapter.addMovies(movies)
+        }
     }
 
     private fun showLoading() {
-        TODO("Not yet implemented")
+        with(binding) {
+            pbLoading.isVisible = true
+            tvInternetError.isVisible = false
+            tvServerError.isVisible = false
+            rvFilms.isVisible = false
+            ivInternetError.isVisible = false
+            btnInternetError.isVisible = false
+        }
     }
 
     override fun onDestroy() {
