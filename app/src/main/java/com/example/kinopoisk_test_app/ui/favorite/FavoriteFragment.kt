@@ -24,8 +24,16 @@ class FavoriteFragment : Fragment() {
     private val binding get() = _binding!!
     private val viewModel by viewModel<FavoriteViewModel>()
     private var movieClickDebounce: ((Movie) -> Unit)? = null
-    private val moviesAdapter = MoviesAdapter { movie ->
-        movieClickDebounce?.let { movieClickDebounce -> movieClickDebounce(movie) }
+    private val moviesAdapter = MoviesAdapter(
+        { movie ->
+            movieClickDebounce?.let { movieClickDebounce -> movieClickDebounce(movie) }
+        },
+        { onMovieLongClick(it) }
+    )
+
+    private fun onMovieLongClick(movie: Movie): Boolean {
+        viewModel.deleteMovieFromFavorites(movie)
+        return true
     }
 
     override fun onCreateView(
