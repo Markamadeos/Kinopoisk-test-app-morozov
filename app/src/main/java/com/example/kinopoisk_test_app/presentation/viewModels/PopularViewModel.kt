@@ -4,16 +4,20 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.kinopoisk_test_app.domian.api.FavoriteInteractor
 import com.example.kinopoisk_test_app.domian.api.SearchInteractor
 import com.example.kinopoisk_test_app.domian.models.Movie
 import com.example.kinopoisk_test_app.domian.models.SearchResultData
 import com.example.kinopoisk_test_app.presentation.models.PopularScreenState
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-class PopularViewModel(private val searchInteractor: SearchInteractor) : ViewModel() {
-
+class PopularViewModel(
+    private val searchInteractor: SearchInteractor,
+    private val favoriteInteractor: FavoriteInteractor
+) : ViewModel() {
     private val _screenState: MutableLiveData<PopularScreenState> = MutableLiveData()
     val screenState: LiveData<PopularScreenState> = _screenState
     private var searchJob: Job? = null
@@ -70,6 +74,12 @@ class PopularViewModel(private val searchInteractor: SearchInteractor) : ViewMod
                     _screenState.postValue(PopularScreenState.Content(result.value))
                 }
             }
+        }
+    }
+
+    fun saveMovieToDb(movie: Movie) {
+        viewModelScope.launch(Dispatchers.IO) {
+            favoriteInteractor.saveMovieToDb(movie)
         }
     }
 

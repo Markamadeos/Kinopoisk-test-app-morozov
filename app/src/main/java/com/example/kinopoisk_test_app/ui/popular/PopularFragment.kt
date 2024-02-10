@@ -25,9 +25,13 @@ class PopularFragment : Fragment() {
     private var _binding: FragmentPopularBinding? = null
     private val binding get() = _binding!!
     private var movieClickDebounce: ((Movie) -> Unit)? = null
-    private val moviesAdapter = MoviesAdapter { movie ->
-        movieClickDebounce?.let { movieClickDebounce -> movieClickDebounce(movie) }
-    }
+
+    private val moviesAdapter = MoviesAdapter(
+        { movie ->
+            movieClickDebounce?.let { movieClickDebounce -> movieClickDebounce(movie) }
+        },
+        { onMovieLongClick(it) }
+    )
     private var currentQuery = EMPTY_QUERY
 
     override fun onCreateView(
@@ -46,6 +50,11 @@ class PopularFragment : Fragment() {
         setClickDebounce()
         bind()
         viewModel.getPopularMovies()
+    }
+
+    private fun onMovieLongClick(movie: Movie): Boolean {
+        viewModel.saveMovieToDb(movie)
+        return true
     }
 
     private fun bind() {

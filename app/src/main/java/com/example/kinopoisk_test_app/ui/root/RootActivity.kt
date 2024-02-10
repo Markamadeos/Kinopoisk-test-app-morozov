@@ -23,11 +23,11 @@ class RootActivity : AppCompatActivity() {
 
         binding.bnBottomNavigation.setupWithNavController(navController)
 
-//        navController.addOnDestinationChangedListener { _, destination, _ ->
-//            when (destination.id) {
-//                R.id.detailFragment -> binding.bottomNavigationView.isVisible = false
-//                else -> binding.bottomNavigationView.isVisible = true
-//            }
-//        }
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            when (destination.id) {
+                R.id.detailFragment -> binding.bnBottomNavigation.isVisible = false
+                else -> binding.bnBottomNavigation.isVisible = true
+            }
+        }
     }
 }

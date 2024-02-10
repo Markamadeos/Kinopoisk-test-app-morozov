@@ -14,7 +14,7 @@ interface KinopoiskApi {
     suspend fun getAllMovies(): MoviesResponseDto
 
     @Headers("x-api-key: $API_TOKEN")
-    @GET("api/v2.2/films/top/{id}")
+    @GET("api/v2.2/films/{id}")
     suspend fun getMovieById(@Path("id") movieId: String): MovieResponseDto
 
     @Headers("x-api-key: $API_TOKEN")
