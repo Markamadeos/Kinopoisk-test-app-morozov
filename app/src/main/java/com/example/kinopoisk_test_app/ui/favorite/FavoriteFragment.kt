@@ -41,6 +41,7 @@ class FavoriteFragment : Fragment() {
         viewModel.screenState.observe(viewLifecycleOwner) {
             updateScreen(it)
         }
+        viewModel.getMovies()
         binding.rvFilms.adapter = moviesAdapter
     }
 
