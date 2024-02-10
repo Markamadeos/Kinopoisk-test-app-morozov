@@ -26,8 +26,11 @@ class MovieDtoConverter {
         }
         val countriesString = StringBuilder("")
         countries.forEach { countriesString.append("${it.country}, ") }
-        return countriesString.toString()
-            .substring(FIRST_POSITION_INDEX, countriesString.length - 2)
+        return if (countriesString.isNotEmpty()) {
+            countriesString.toString().substring(FIRST_POSITION_INDEX, countriesString.length - 2)
+        } else {
+            EMPTY_PARAM
+        }
     }
 
     private fun getGenres(genres: List<GenreDto>?): String {
@@ -36,7 +39,11 @@ class MovieDtoConverter {
         }
         val genresString = StringBuilder("")
         genres.forEach { genresString.append("${it.genre}, ") }
-        return genresString.toString().substring(FIRST_POSITION_INDEX, genresString.length - 2)
+        return if (genresString.isNotEmpty()) {
+            genresString.toString().substring(FIRST_POSITION_INDEX, genresString.length - 2)
+        } else {
+            EMPTY_PARAM
+        }
     }
 
     companion object {
