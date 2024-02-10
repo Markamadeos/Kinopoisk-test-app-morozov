@@ -20,4 +20,7 @@ interface MovieDao {
 
     @Delete
     suspend fun deleteMovie(movie: MovieEntity)
+
+    @Query("SELECT id FROM movies")
+    suspend fun getIds(): List<String>
 }
