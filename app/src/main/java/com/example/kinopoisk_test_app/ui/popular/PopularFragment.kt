@@ -28,6 +28,7 @@ class PopularFragment : Fragment() {
     private val moviesAdapter = MoviesAdapter { movie ->
         movieClickDebounce?.let { movieClickDebounce -> movieClickDebounce(movie) }
     }
+    private var currentQuery = EMPTY_QUERY
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -50,7 +51,8 @@ class PopularFragment : Fragment() {
     private fun bind() {
         with(binding) {
             etSearchQuery.doAfterTextChanged { input ->
-                viewModel.debounceSearch(input.toString())
+                currentQuery = input.toString()
+                viewModel.debounceSearch(currentQuery)
             }
             btnBack.setOnClickListener {
                 tvHeader.isVisible = true
@@ -66,10 +68,10 @@ class PopularFragment : Fragment() {
                 etSearchQuery.requestFocus()
             }
             btnInternetError.setOnClickListener {
-                if (etSearchQuery.text.isNullOrEmpty()) {
+                if (currentQuery.isEmpty()) {
                     viewModel.getPopularMovies()
                 } else {
-                    viewModel.debounceSearch(etSearchQuery.toString())
+                    viewModel.searchMovies(currentQuery)
                 }
             }
             rvFilms.adapter = moviesAdapter
@@ -167,5 +169,6 @@ class PopularFragment : Fragment() {
 
     companion object {
         private const val CLICK_DEBOUNCE_DELAY_MILLIS = 200L
+        private const val EMPTY_QUERY = ""
     }
 }
