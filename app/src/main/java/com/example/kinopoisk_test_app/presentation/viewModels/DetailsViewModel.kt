@@ -4,20 +4,21 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.kinopoisk_test_app.domian.api.SearchInteractor
 import com.example.kinopoisk_test_app.domian.api.SearchRepository
 import com.example.kinopoisk_test_app.domian.models.Movie
 import com.example.kinopoisk_test_app.domian.models.SearchResultData
 import com.example.kinopoisk_test_app.presentation.models.DetailScreenState
 import kotlinx.coroutines.launch
 
-class DetailsViewModel(private val searchRepository: SearchRepository) : ViewModel() {
+class DetailsViewModel(private val searchInteractor: SearchInteractor) : ViewModel() {
     private val _screenState: MutableLiveData<DetailScreenState> = MutableLiveData()
     val screenState: LiveData<DetailScreenState> = _screenState
 
     fun fillData(movieId: String) {
         _screenState.postValue(DetailScreenState.Loading)
         viewModelScope.launch {
-            searchRepository.getMovieById(movieId).collect { result ->
+            searchInteractor.getMovieById(movieId).collect { result ->
                 processingResult(result)
             }
         }
