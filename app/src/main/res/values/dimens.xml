@@ -24,5 +24,6 @@
     <dimen name="_3dp">3dp</dimen>
     <dimen name="_32dp">32dp</dimen>
     <dimen name="_300dp">300dp</dimen>
+    <dimen name="_200dp">200dp</dimen>
 
 </resources>
