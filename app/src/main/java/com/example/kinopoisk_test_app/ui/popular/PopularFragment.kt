@@ -50,7 +50,7 @@ class PopularFragment : Fragment() {
     private fun bind() {
         with(binding) {
             etSearchQuery.doAfterTextChanged { input ->
-                viewModel.searchMovies(input.toString())
+                viewModel.debounceSearch(input.toString())
             }
             btnBack.setOnClickListener {
                 tvHeader.isVisible = true
@@ -63,6 +63,7 @@ class PopularFragment : Fragment() {
                 etSearchQuery.isVisible = true
                 btnSearch.isVisible = false
                 btnBack.isVisible = true
+                etSearchQuery.requestFocus()
             }
             rvFilms.adapter = moviesAdapter
         }

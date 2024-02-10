@@ -29,7 +29,7 @@ class PopularViewModel(private val searchInteractor: SearchInteractor) : ViewMod
         }
     }
 
-    fun searchMovies(query: String) {
+    private fun searchMovies(query: String) {
         _screenState.postValue(PopularScreenState.Loading)
         viewModelScope.launch {
             searchInteractor.searchMovies(query).collect { result ->

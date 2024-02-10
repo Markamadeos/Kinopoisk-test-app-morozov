@@ -27,12 +27,11 @@ class MoviesAdapter(private val onClick: (Movie) -> Unit) :
 
     fun addMovies(movies: List<Movie>) {
         items.addAll(movies)
-        notifyItemRangeInserted(items.size - movies.size, movies.size)
+        notifyDataSetChanged()
     }
 
     fun clearData() {
         items.clear()
         notifyDataSetChanged()
     }
-
 }
