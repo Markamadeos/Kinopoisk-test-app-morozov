@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.kinopoisk_test_app.domian.api.SearchInteractor
-import com.example.kinopoisk_test_app.domian.api.SearchRepository
 import com.example.kinopoisk_test_app.domian.models.Movie
 import com.example.kinopoisk_test_app.domian.models.SearchResultData
 import com.example.kinopoisk_test_app.presentation.models.DetailScreenState

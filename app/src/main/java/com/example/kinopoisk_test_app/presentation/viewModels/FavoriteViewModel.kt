@@ -35,6 +35,7 @@ class FavoriteViewModel(private val favoriteInteractor: FavoriteInteractor) : Vi
     fun deleteMovieFromFavorites(movie: Movie) {
         viewModelScope.launch(Dispatchers.IO) {
             favoriteInteractor.deleteMovieFromFavorites(movie)
+            getMovies()
         }
     }
 }
