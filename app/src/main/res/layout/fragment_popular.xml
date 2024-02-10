@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/iv_search"
+        android:id="@+id/btn_search"
         android:layout_width="@dimen/_24dp"
         android:layout_height="@dimen/_24dp"
         android:layout_marginTop="@dimen/_29dp"
@@ -29,7 +29,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/bnt_back"
+        android:id="@+id/btn_back"
         android:layout_width="@dimen/_24dp"
         android:layout_height="@dimen/_24dp"
         android:layout_marginStart="@dimen/_16dp"
@@ -52,11 +52,11 @@
         android:maxLines="1"
         android:singleLine="true"
         android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@id/bnt_back"
+        app:layout_constraintBottom_toBottomOf="@id/btn_back"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0"
-        app:layout_constraintStart_toEndOf="@id/bnt_back"
-        app:layout_constraintTop_toTopOf="@id/bnt_back" />
+        app:layout_constraintStart_toEndOf="@id/btn_back"
+        app:layout_constraintTop_toTopOf="@id/btn_back" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/top_guideline"
@@ -142,7 +142,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_20dp"
-        android:visibility="gone"
+        android:clipToPadding="false"
+        android:paddingBottom="@dimen/_150dp"
+        android:visibility="visible"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
