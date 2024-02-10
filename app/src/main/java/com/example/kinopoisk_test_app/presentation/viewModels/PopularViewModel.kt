@@ -13,7 +13,6 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class PopularViewModel(private val searchInteractor: SearchInteractor) : ViewModel() {
-
     private val _screenState: MutableLiveData<PopularScreenState> = MutableLiveData()
     val screenState: LiveData<PopularScreenState> = _screenState
     private var searchJob: Job? = null
