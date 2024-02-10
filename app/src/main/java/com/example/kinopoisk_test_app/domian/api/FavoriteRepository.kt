@@ -1,11 +1,14 @@
 package com.example.kinopoisk_test_app.domian.api
 
-import com.example.kinopoisk_test_app.data.db.entity.MovieEntity
+import com.example.kinopoisk_test_app.domian.models.Movie
+import kotlinx.coroutines.flow.Flow
 
 interface FavoriteRepository {
-    suspend fun saveMovieToDb(movie: MovieEntity)
-    suspend fun getMovies(): List<MovieEntity>
-    suspend fun getMovieById(movieId: String): MovieEntity?
-    suspend fun deleteMovieFromFavorites(movie: MovieEntity)
+    suspend fun saveMovieToDb(movie: Movie)
+    suspend fun getMovies(): Flow<List<Movie>>
+    suspend fun getMovieById(movieId: String): Movie?
+    suspend fun deleteMovieFromFavorites(movie: Movie)
     suspend fun isMovieInFavorites(movieId: String): Boolean
+
+    suspend fun getFavoriteIds(): List<String>
 }
