@@ -65,6 +65,7 @@ class DetailFragment : Fragment() {
             tvInternetError.isVisible = true
             ivInternetError.isVisible = true
             pbLoading.isVisible = false
+            tvInternetError.text = getString(message)
         }
     }
 
