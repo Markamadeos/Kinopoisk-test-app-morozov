@@ -13,4 +13,7 @@
     <string name="country_label">Страна: </string>
     <string name="favorite_header">Избранное</string>
     <string name="nothing_found_favorites">Пока вы ничего не добавили в избранное</string>
+    <string name="delete_from_fav_dialog">Удалить фильм из избранного?</string>
+    <string name="dialog_no">Нет</string>
+    <string name="dialog_yes">Да</string>
 </resources>

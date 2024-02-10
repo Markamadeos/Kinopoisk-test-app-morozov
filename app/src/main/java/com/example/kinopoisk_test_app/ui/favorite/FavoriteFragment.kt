@@ -17,6 +17,7 @@ import com.example.kinopoisk_test_app.presentation.models.FavoriteScreenState
 import com.example.kinopoisk_test_app.presentation.viewModels.FavoriteViewModel
 import com.example.kinopoisk_test_app.util.MOVIE_ID
 import com.example.kinopoisk_test_app.util.debounce
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class FavoriteFragment : Fragment() {
@@ -28,13 +29,9 @@ class FavoriteFragment : Fragment() {
         { movie ->
             movieClickDebounce?.let { movieClickDebounce -> movieClickDebounce(movie) }
         },
-        { onMovieLongClick(it) }
+        { showDialog(it) }
     )
 
-    private fun onMovieLongClick(movie: Movie): Boolean {
-        viewModel.deleteMovieFromFavorites(movie)
-        return true
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -51,6 +48,7 @@ class FavoriteFragment : Fragment() {
         }
         viewModel.getMovies()
         binding.rvFilms.adapter = moviesAdapter
+        setClickDebounce()
     }
 
     private fun updateScreen(state: FavoriteScreenState) {
@@ -100,6 +98,18 @@ class FavoriteFragment : Fragment() {
                 movieBundle
             )
         }
+    }
+
+    private fun showDialog(movie: Movie): Boolean {
+        MaterialAlertDialogBuilder(requireContext(), R.style.AlertDialogTheme)
+            .setMessage(getString(R.string.delete_from_fav_dialog))
+            .setCancelable(false)
+            .setNegativeButton(getString(R.string.dialog_no)) { dialog, which ->
+            }
+            .setPositiveButton(getString(R.string.dialog_yes)) { dialog, which ->
+                viewModel.deleteMovieFromFavorites(movie)
+            }.show()
+        return true
     }
 
     companion object {
