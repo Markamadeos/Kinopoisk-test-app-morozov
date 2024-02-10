@@ -9,4 +9,6 @@
     <string name="popular_header">Популярное</string>
     <string name="search_hint">Поиск</string>
     <string name="repeat">Повторить</string>
+    <string name="genre_label">Жанры: </string>
+    <string name="country_label">Страна: </string>
 </resources>

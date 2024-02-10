@@ -22,5 +22,7 @@
     <dimen name="_4dp">4dp</dimen>
     <dimen name="_150dp">150dp</dimen>
     <dimen name="_3dp">3dp</dimen>
+    <dimen name="_32dp">32dp</dimen>
+    <dimen name="_300dp">300dp</dimen>
 
 </resources>
