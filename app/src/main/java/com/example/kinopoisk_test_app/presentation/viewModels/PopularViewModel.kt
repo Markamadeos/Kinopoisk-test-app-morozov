@@ -4,11 +4,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.kinopoisk_test_app.R
 import com.example.kinopoisk_test_app.domian.api.FavoriteInteractor
 import com.example.kinopoisk_test_app.domian.api.SearchInteractor
 import com.example.kinopoisk_test_app.domian.models.Movie
 import com.example.kinopoisk_test_app.domian.models.SearchResultData
 import com.example.kinopoisk_test_app.presentation.models.PopularScreenState
+import com.example.kinopoisk_test_app.presentation.models.SingleLiveEvent
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -20,7 +22,9 @@ class PopularViewModel(
     private val favoriteInteractor: FavoriteInteractor
 ) : ViewModel() {
     private val _screenState: MutableLiveData<PopularScreenState> = MutableLiveData()
+    private val _favoriteNotificationSate = SingleLiveEvent<Int>()
     val screenState: LiveData<PopularScreenState> = _screenState
+    val favoriteNotificationState: LiveData<Int> = _favoriteNotificationSate
     private var searchJob: Job? = null
     private var currentQuery = EMPTY_QUERY
 
@@ -84,12 +88,13 @@ class PopularViewModel(
     fun saveMovieToDb(movie: Movie) {
         viewModelScope.launch(Dispatchers.IO) {
             if (favoriteInteractor.isMovieInFavorites(movie.id)) {
-                // showToast
+                _favoriteNotificationSate.postValue(R.string.already_in_favorites)
             } else {
                 val fullInfoMovie =
-                    (searchInteractor.getMovieById(movie.id).first() as SearchResultData.Data).value!!
+                    (searchInteractor.getMovieById(movie.id)
+                        .first() as SearchResultData.Data).value!!
                 favoriteInteractor.saveMovieToDb(fullInfoMovie)
-                // show toast
+                _favoriteNotificationSate.postValue(R.string.added_to_favorites)
             }
         }
     }
