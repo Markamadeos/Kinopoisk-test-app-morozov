@@ -84,7 +84,7 @@
         android:background="@drawable/rounded_bottom_sheet"
         android:orientation="vertical"
         android:paddingHorizontal="@dimen/_32dp"
-        app:behavior_peekHeight="@dimen/_200dp"
+        app:behavior_peekHeight="@dimen/_300dp"
         app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
         tools:visibility="visible">
 
