@@ -1,6 +1,7 @@
 package com.example.kinopoisk_test_app.ui.popular
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -53,6 +54,7 @@ class PopularFragment : Fragment() {
     }
 
     private fun onMovieLongClick(movie: Movie): Boolean {
+        Log.d("WTF fragment", movie.description)
         viewModel.saveMovieToDb(movie)
         return true
     }

@@ -9,7 +9,7 @@ import com.example.kinopoisk_test_app.data.db.entity.MovieEntity
 
 @Dao
 interface MovieDao {
-    @Insert(entity = MovieEntity::class, onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertMovie(movie: MovieEntity)
 
     @Query("SELECT * FROM movies_table")

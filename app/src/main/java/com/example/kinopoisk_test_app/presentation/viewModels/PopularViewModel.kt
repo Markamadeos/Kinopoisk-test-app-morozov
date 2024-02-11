@@ -12,6 +12,7 @@ import com.example.kinopoisk_test_app.presentation.models.PopularScreenState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
 class PopularViewModel(
@@ -82,7 +83,9 @@ class PopularViewModel(
 
     fun saveMovieToDb(movie: Movie) {
         viewModelScope.launch(Dispatchers.IO) {
-            favoriteInteractor.saveMovieToDb(movie)
+            val fullInfoMovie =
+                (searchInteractor.getMovieById(movie.id).first() as SearchResultData.Data).value!!
+            favoriteInteractor.saveMovieToDb(fullInfoMovie)
         }
     }
 
