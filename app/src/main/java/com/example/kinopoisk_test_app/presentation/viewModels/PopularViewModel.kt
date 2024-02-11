@@ -83,9 +83,14 @@ class PopularViewModel(
 
     fun saveMovieToDb(movie: Movie) {
         viewModelScope.launch(Dispatchers.IO) {
-            val fullInfoMovie =
-                (searchInteractor.getMovieById(movie.id).first() as SearchResultData.Data).value!!
-            favoriteInteractor.saveMovieToDb(fullInfoMovie)
+            if (favoriteInteractor.isMovieInFavorites(movie.id)) {
+                // showToast
+            } else {
+                val fullInfoMovie =
+                    (searchInteractor.getMovieById(movie.id).first() as SearchResultData.Data).value!!
+                favoriteInteractor.saveMovieToDb(fullInfoMovie)
+                // show toast
+            }
         }
     }
 
