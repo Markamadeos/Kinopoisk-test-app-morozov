@@ -20,8 +20,8 @@ class FavoriteRepositoryImpl(
         emit(convertMovieFromDbEntity(appDataBase.movieDao().getMovies()))
     }
 
-    override suspend fun getMovieById(movieId: String): Movie? {
-        return appDataBase.movieDao().getMovie(movieId)?.let { converter.map(it) }
+    override suspend fun getMovieById(movieId: String): Flow<Movie> = flow {
+        emit(converter.map(appDataBase.movieDao().getMovie(movieId)))
     }
 
     override suspend fun deleteMovieFromFavorites(movie: Movie) {

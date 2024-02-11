@@ -38,7 +38,11 @@ class DetailFragment : Fragment() {
         }
         bind()
         movieId = requireArguments().getString(MOVIE_ID) ?: EMPTY_ID
-        viewModel.fillData(movieId)
+        if (findNavController().previousBackStackEntry?.destination?.id == R.id.favoriteFragment) {
+            viewModel.getDataFromDb(movieId)
+        } else {
+            viewModel.getDataFromNetwork(movieId)
+        }
     }
 
     private fun bind() {
