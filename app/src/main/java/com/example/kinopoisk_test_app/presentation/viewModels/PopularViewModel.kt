@@ -28,15 +28,20 @@ class PopularViewModel(
     private var searchJob: Job? = null
     private var currentQuery = EMPTY_QUERY
 
-    fun getPopularMovies() {
-        if (screenState.value is PopularScreenState.Content) {
-            return
-        }
+    private fun getPopularMovies() {
         _screenState.postValue(PopularScreenState.Loading)
         viewModelScope.launch(Dispatchers.IO) {
             searchInteractor.getPopularMovies().collect { result ->
                 processingResult(result)
             }
+        }
+    }
+
+    fun getMovies() {
+        if (currentQuery.isEmpty()) {
+            getPopularMovies()
+        } else {
+            searchMovies(currentQuery)
         }
     }
 

@@ -55,7 +55,7 @@ class PopularFragment : Fragment() {
         }
         setClickDebounce()
         bind()
-        viewModel.getPopularMovies()
+        viewModel.getMovies()
     }
 
     private fun showNotification(message: Int) {
@@ -94,11 +94,7 @@ class PopularFragment : Fragment() {
                 showKeyboard()
             }
             btnInternetError.setOnClickListener {
-                if (currentQuery.isEmpty()) {
-                    viewModel.getPopularMovies()
-                } else {
-                    viewModel.searchMovies(currentQuery)
-                }
+                viewModel.getMovies()
             }
             rvFilms.adapter = moviesAdapter
         }
