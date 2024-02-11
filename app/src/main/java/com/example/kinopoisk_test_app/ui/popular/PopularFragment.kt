@@ -1,9 +1,12 @@
 package com.example.kinopoisk_test_app.ui.popular
 
+import android.app.Activity
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.core.widget.doAfterTextChanged
@@ -18,6 +21,7 @@ import com.example.kinopoisk_test_app.presentation.models.PopularScreenState
 import com.example.kinopoisk_test_app.presentation.viewModels.PopularViewModel
 import com.example.kinopoisk_test_app.util.MOVIE_ID
 import com.example.kinopoisk_test_app.util.debounce
+import com.example.kinopoisk_test_app.util.showKeyboard
 import com.google.android.material.snackbar.Snackbar
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -87,6 +91,7 @@ class PopularFragment : Fragment() {
                 btnSearch.isVisible = false
                 btnBack.isVisible = true
                 etSearchQuery.requestFocus()
+                showKeyboard()
             }
             btnInternetError.setOnClickListener {
                 if (currentQuery.isEmpty()) {
