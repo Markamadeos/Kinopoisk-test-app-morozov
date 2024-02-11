@@ -1,5 +1,6 @@
 package com.example.kinopoisk_test_app.ui.detail
 
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +9,10 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.target.Target
 import com.example.kinopoisk_test_app.R
 import com.example.kinopoisk_test_app.databinding.FragmentDetailBinding
 import com.example.kinopoisk_test_app.domian.models.Movie
@@ -83,11 +88,36 @@ class DetailFragment : Fragment() {
             tvCountryValue.text = movie.countries
             tvGenreValue.text = movie.genres
             pbLoading.isVisible = true
-            Glide.with(requireContext())
-                .load(movie.cover)
-                .fitCenter()
-                .into(ivCover)
+            loadPicture(movie.cover)
         }
+    }
+
+    private fun loadPicture(cover: String) {
+        Glide.with(requireContext())
+            .load(cover)
+            .listener(object : RequestListener<Drawable> {
+                override fun onLoadFailed(
+                    e: GlideException?,
+                    model: Any?,
+                    target: com.bumptech.glide.request.target.Target<Drawable>?,
+                    isFirstResource: Boolean
+                ): Boolean {
+                    // nothing to do
+                    return false
+                }
+                override fun onResourceReady(
+                    resource: Drawable?,
+                    model: Any?,
+                    target: Target<Drawable>?,
+                    dataSource: DataSource?,
+                    isFirstResource: Boolean
+                ): Boolean {
+                    binding.pbLoading.isVisible = false
+                    return false
+                }
+            })
+            .fitCenter()
+            .into(binding.ivCover)
     }
 
     private fun showLoading() {
