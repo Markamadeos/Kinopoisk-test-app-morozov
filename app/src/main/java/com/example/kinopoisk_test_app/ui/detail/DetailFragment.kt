@@ -25,7 +25,6 @@ class DetailFragment : Fragment() {
     private val viewModel by viewModel<DetailsViewModel>()
     private var _binding: FragmentDetailBinding? = null
     private val binding get() = _binding!!
-    private var movieId = EMPTY_ID
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,11 +40,10 @@ class DetailFragment : Fragment() {
             updateScreen(it)
         }
         bind()
-        movieId = requireArguments().getString(MOVIE_ID) ?: EMPTY_ID
         if (findNavController().previousBackStackEntry?.destination?.id == R.id.favoriteFragment) {
-            viewModel.getDataFromDb(movieId)
+            viewModel.getDataFromDb(requireArguments().getString(MOVIE_ID) ?: EMPTY_ID)
         } else {
-            viewModel.getDataFromNetwork(movieId)
+            viewModel.getDataFromNetwork(requireArguments().getString(MOVIE_ID) ?: EMPTY_ID)
         }
     }
 
@@ -88,7 +86,7 @@ class DetailFragment : Fragment() {
             tvCountryValue.text = movie.countries
             tvGenreValue.text = movie.genres
             pbLoading.isVisible = true
-            loadPicture(movie.cover)
+            loadPicture(movie.coverSmall)
         }
     }
 
@@ -99,12 +97,13 @@ class DetailFragment : Fragment() {
                 override fun onLoadFailed(
                     e: GlideException?,
                     model: Any?,
-                    target: com.bumptech.glide.request.target.Target<Drawable>?,
+                    target:Target<Drawable>?,
                     isFirstResource: Boolean
                 ): Boolean {
                     // nothing to do
                     return false
                 }
+
                 override fun onResourceReady(
                     resource: Drawable?,
                     model: Any?,

@@ -58,11 +58,6 @@ class PopularFragment : Fragment() {
         viewModel.getPopularMovies()
     }
 
-    private fun updateList(movies: List<Movie>) {
-        moviesAdapter.clearData()
-        moviesAdapter.addMovies(movies)
-    }
-
     private fun showNotification(message: Int) {
         Snackbar.make(
             binding.root,
