@@ -8,5 +8,6 @@ data class Movie(
     val year: String,
     val description: String,
     val countries: String,
-    val genres: String
+    val genres: String,
+    var isFavorite: Boolean = false
 )

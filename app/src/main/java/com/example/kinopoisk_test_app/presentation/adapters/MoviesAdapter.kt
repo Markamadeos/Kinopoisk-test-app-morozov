@@ -38,4 +38,9 @@ class MoviesAdapter(
         items.clear()
         notifyDataSetChanged()
     }
+
+    fun updateItem(movie: Movie) {
+        items.find { it.id == movie.id }?.isFavorite = true
+        notifyItemChanged(items.indexOf(movie))
+    }
 }
