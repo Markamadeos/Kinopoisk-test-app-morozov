@@ -83,6 +83,7 @@ class PopularFragment : Fragment() {
                 etSearchQuery.isVisible = false
                 btnSearch.isVisible = true
                 btnBack.isVisible = false
+                hideKeyboard()
             }
             btnSearch.setOnClickListener {
                 tvHeader.isVisible = false
@@ -165,7 +166,6 @@ class PopularFragment : Fragment() {
 
     private fun showContent(movies: List<Movie>) {
         with(binding) {
-            hideKeyboard()
             pbLoading.isVisible = false
             tvInternetError.isVisible = false
             tvServerError.isVisible = false
@@ -178,6 +178,7 @@ class PopularFragment : Fragment() {
     }
 
     private fun showLoading() {
+        hideKeyboard()
         with(binding) {
             pbLoading.isVisible = true
             tvInternetError.isVisible = false

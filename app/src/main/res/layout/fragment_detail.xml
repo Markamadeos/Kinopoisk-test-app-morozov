@@ -103,6 +103,7 @@
             android:layout_marginVertical="@dimen/_16dp"
             android:ellipsize="end"
             android:maxLines="1"
+            android:textColor="?attr/header_text_color"
             tools:text="Изгой-один Звездные войны Изгой-один Звездные войны" />
 
         <TextView
@@ -110,7 +111,7 @@
             style="@style/TFRobotoRegular16"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/gray"
+            android:textColor="?attr/description_text_color"
             tools:text="Сопротивление собирает отряд для выполнения особой миссии - надо выкрасть чертежи самого совершенного и мертоносного оружия Империи. Не всем суждено вернуться домой, но герои готовы к этому, ведь на кону судьба Галактики" />
 
         <LinearLayout
@@ -125,7 +126,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_16dp"
                 android:layout_marginBottom="@dimen/_8dp"
-                android:text="@string/genre_label" />
+                android:text="@string/genre_label"
+                android:textColor="?attr/header_text_color" />
 
             <TextView
                 android:id="@+id/tv_genre_value"
@@ -137,6 +139,7 @@
                 android:layout_marginBottom="@dimen/_8dp"
                 android:ellipsize="end"
                 android:maxLines="1"
+                android:textColor="?attr/header_text_color"
                 tools:text="Жанры: фантастика, приключения" />
 
         </LinearLayout>
@@ -151,7 +154,8 @@
                 style="@style/TFRobotoBold16"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/country_label" />
+                android:text="@string/country_label"
+                android:textColor="?attr/header_text_color" />
 
             <TextView
                 android:id="@+id/tv_country_value"
@@ -161,6 +165,7 @@
                 android:layout_marginStart="@dimen/_3dp"
                 android:ellipsize="end"
                 android:maxLines="1"
+                android:textColor="?attr/header_text_color"
                 tools:text="США" />
 
         </LinearLayout>
