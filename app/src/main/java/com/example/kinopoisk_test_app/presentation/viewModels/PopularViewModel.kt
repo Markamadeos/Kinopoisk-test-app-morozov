@@ -4,14 +4,17 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.kinopoisk_test_app.R
 import com.example.kinopoisk_test_app.domian.api.FavoriteInteractor
 import com.example.kinopoisk_test_app.domian.api.SearchInteractor
 import com.example.kinopoisk_test_app.domian.models.Movie
 import com.example.kinopoisk_test_app.domian.models.SearchResultData
 import com.example.kinopoisk_test_app.presentation.models.PopularScreenState
+import com.example.kinopoisk_test_app.presentation.models.SingleLiveEvent
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
 class PopularViewModel(
@@ -19,23 +22,32 @@ class PopularViewModel(
     private val favoriteInteractor: FavoriteInteractor
 ) : ViewModel() {
     private val _screenState: MutableLiveData<PopularScreenState> = MutableLiveData()
+    private val _favoriteNotificationSate = SingleLiveEvent<Int>()
     val screenState: LiveData<PopularScreenState> = _screenState
+    val favoriteNotificationState: LiveData<Int> = _favoriteNotificationSate
     private var searchJob: Job? = null
     private var currentQuery = EMPTY_QUERY
 
-
-    fun getPopularMovies() {
+    private fun getPopularMovies() {
         _screenState.postValue(PopularScreenState.Loading)
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             searchInteractor.getPopularMovies().collect { result ->
                 processingResult(result)
             }
         }
     }
 
+    fun getMovies() {
+        if (currentQuery.isEmpty()) {
+            getPopularMovies()
+        } else {
+            searchMovies(currentQuery)
+        }
+    }
+
     fun searchMovies(query: String) {
         _screenState.postValue(PopularScreenState.Loading)
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             searchInteractor.searchMovies(query).collect { result ->
                 processingResult(result)
             }
@@ -79,7 +91,23 @@ class PopularViewModel(
 
     fun saveMovieToDb(movie: Movie) {
         viewModelScope.launch(Dispatchers.IO) {
-            favoriteInteractor.saveMovieToDb(movie)
+            if (favoriteInteractor.isMovieInFavorites(movie.id)) {
+                _favoriteNotificationSate.postValue(R.string.already_in_favorites)
+            } else {
+                var fullMovieInfo: Movie? = null
+                try {
+                    fullMovieInfo =
+                        (searchInteractor.getMovieById(movie.id)
+                            .first() as SearchResultData.Data).value!!
+                } catch (_: Throwable) {
+                }
+                if (fullMovieInfo == null) {
+                    _favoriteNotificationSate.postValue(R.string.add_to_favorite_error)
+                } else {
+                    favoriteInteractor.saveMovieToDb(fullMovieInfo)
+                    _favoriteNotificationSate.postValue(R.string.added_to_favorites)
+                }
+            }
         }
     }
 

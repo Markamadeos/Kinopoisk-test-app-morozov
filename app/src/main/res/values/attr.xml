@@ -7,4 +7,7 @@
     <attr name="white_universal" format="reference" />
     <attr name="blue" format="reference" />
     <attr name="light_blue" format="reference" />
+    <attr name="bottom_nav_background" format="reference" />
+    <attr name="header_text_color" format="reference" />
+    <attr name="description_text_color" format="reference" />
 </resources>

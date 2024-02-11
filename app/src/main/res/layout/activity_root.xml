@@ -20,7 +20,7 @@
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bn_bottom_navigation"
         android:layout_width="0dp"
-        android:layout_height="@dimen/_64dp"
+        android:layout_height="@dimen/_52dp"
         android:layout_marginLeft="@dimen/_80dp"
         android:layout_marginRight="@dimen/_80dp"
         android:layout_marginBottom="@dimen/_16dp"

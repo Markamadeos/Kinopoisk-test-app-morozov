@@ -18,6 +18,9 @@ import com.example.kinopoisk_test_app.presentation.models.PopularScreenState
 import com.example.kinopoisk_test_app.presentation.viewModels.PopularViewModel
 import com.example.kinopoisk_test_app.util.MOVIE_ID
 import com.example.kinopoisk_test_app.util.debounce
+import com.example.kinopoisk_test_app.util.hideKeyboard
+import com.example.kinopoisk_test_app.util.showKeyboard
+import com.google.android.material.snackbar.Snackbar
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class PopularFragment : Fragment() {
@@ -47,13 +50,25 @@ class PopularFragment : Fragment() {
         viewModel.screenState.observe(viewLifecycleOwner) {
             updateScreen(it)
         }
+        viewModel.favoriteNotificationState.observe(viewLifecycleOwner) {
+            showNotification(it)
+        }
         setClickDebounce()
         bind()
-        viewModel.getPopularMovies()
+        viewModel.getMovies()
+    }
+
+    private fun showNotification(message: Int) {
+        Snackbar.make(
+            binding.root,
+            message,
+            Snackbar.LENGTH_SHORT
+        ).show()
     }
 
     private fun onMovieLongClick(movie: Movie): Boolean {
         viewModel.saveMovieToDb(movie)
+        moviesAdapter.updateItem(movie)
         return true
     }
 
@@ -68,6 +83,7 @@ class PopularFragment : Fragment() {
                 etSearchQuery.isVisible = false
                 btnSearch.isVisible = true
                 btnBack.isVisible = false
+                hideKeyboard()
             }
             btnSearch.setOnClickListener {
                 tvHeader.isVisible = false
@@ -75,13 +91,10 @@ class PopularFragment : Fragment() {
                 btnSearch.isVisible = false
                 btnBack.isVisible = true
                 etSearchQuery.requestFocus()
+                showKeyboard()
             }
             btnInternetError.setOnClickListener {
-                if (currentQuery.isEmpty()) {
-                    viewModel.getPopularMovies()
-                } else {
-                    viewModel.searchMovies(currentQuery)
-                }
+                viewModel.getMovies()
             }
             rvFilms.adapter = moviesAdapter
         }
@@ -161,6 +174,7 @@ class PopularFragment : Fragment() {
     }
 
     private fun showLoading() {
+        hideKeyboard()
         with(binding) {
             pbLoading.isVisible = true
             tvInternetError.isVisible = false

@@ -12,7 +12,7 @@ val viewModelModule = module {
     }
 
     viewModel {
-        DetailsViewModel(searchInteractor = get())
+        DetailsViewModel(searchInteractor = get(), favoriteInteractor = get())
     }
 
     viewModel {

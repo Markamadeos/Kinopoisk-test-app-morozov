@@ -15,7 +15,7 @@ class FavoriteInteractorImpl(private val favoriteRepository: FavoriteRepository)
         return favoriteRepository.getMovies()
     }
 
-    override suspend fun getMovieById(movieId: String): Movie? {
+    override suspend fun getMovieById(movieId: String): Flow<Movie> {
         return favoriteRepository.getMovieById(movieId)
     }
 

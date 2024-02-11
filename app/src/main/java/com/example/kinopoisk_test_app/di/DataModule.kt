@@ -43,7 +43,7 @@ val dataModule = module {
     factory { MovieDbConverter() }
 
     single<SearchRepository> {
-        SearchRepositoryImpl(converter = get(), networkClient = get())
+        SearchRepositoryImpl(converter = get(), networkClient = get(), appDataBase = get())
     }
 
     single<FavoriteRepository> {

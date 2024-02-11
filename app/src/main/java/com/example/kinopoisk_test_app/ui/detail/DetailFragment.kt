@@ -1,5 +1,6 @@
 package com.example.kinopoisk_test_app.ui.detail
 
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,7 +9,10 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.target.Target
 import com.example.kinopoisk_test_app.R
 import com.example.kinopoisk_test_app.databinding.FragmentDetailBinding
 import com.example.kinopoisk_test_app.domian.models.Movie
@@ -21,7 +25,6 @@ class DetailFragment : Fragment() {
     private val viewModel by viewModel<DetailsViewModel>()
     private var _binding: FragmentDetailBinding? = null
     private val binding get() = _binding!!
-    private var movieId = EMPTY_ID
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,8 +40,11 @@ class DetailFragment : Fragment() {
             updateScreen(it)
         }
         bind()
-        movieId = requireArguments().getString(MOVIE_ID) ?: EMPTY_ID
-        viewModel.fillData(movieId)
+        if (findNavController().previousBackStackEntry?.destination?.id == R.id.favoriteFragment) {
+            viewModel.getDataFromDb(requireArguments().getString(MOVIE_ID) ?: EMPTY_ID)
+        } else {
+            viewModel.getDataFromNetwork(requireArguments().getString(MOVIE_ID) ?: EMPTY_ID)
+        }
     }
 
     private fun bind() {
@@ -75,17 +81,42 @@ class DetailFragment : Fragment() {
             ivCover.isVisible = true
             tvInternetError.isVisible = false
             ivInternetError.isVisible = false
-            pbLoading.isVisible = false
-
             tvMovieTitle.text = movie.name
             tvDescription.text = movie.description
             tvCountryValue.text = movie.countries
             tvGenreValue.text = movie.genres
-            Glide.with(requireContext())
-                .load(movie.cover)
-                .transform(CenterCrop())
-                .into(ivCover)
+            pbLoading.isVisible = true
+            loadPicture(movie.coverSmall)
         }
+    }
+
+    private fun loadPicture(cover: String) {
+        Glide.with(requireContext())
+            .load(cover)
+            .listener(object : RequestListener<Drawable> {
+                override fun onLoadFailed(
+                    e: GlideException?,
+                    model: Any?,
+                    target:Target<Drawable>?,
+                    isFirstResource: Boolean
+                ): Boolean {
+                    // nothing to do
+                    return false
+                }
+
+                override fun onResourceReady(
+                    resource: Drawable?,
+                    model: Any?,
+                    target: Target<Drawable>?,
+                    dataSource: DataSource?,
+                    isFirstResource: Boolean
+                ): Boolean {
+                    binding.pbLoading.isVisible = false
+                    return false
+                }
+            })
+            .fitCenter()
+            .into(binding.ivCover)
     }
 
     private fun showLoading() {
