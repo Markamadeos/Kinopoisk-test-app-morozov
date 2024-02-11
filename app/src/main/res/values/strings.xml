@@ -16,4 +16,6 @@
     <string name="delete_from_fav_dialog">Удалить фильм из избранного?</string>
     <string name="dialog_no">Нет</string>
     <string name="dialog_yes">Да</string>
+    <string name="already_in_favorites">Фильм уже в избранном!</string>
+    <string name="added_to_favorites">Фильм добавлен в избранное</string>
 </resources>

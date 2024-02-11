@@ -1,7 +1,6 @@
 package com.example.kinopoisk_test_app.ui.popular
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,6 +18,7 @@ import com.example.kinopoisk_test_app.presentation.models.PopularScreenState
 import com.example.kinopoisk_test_app.presentation.viewModels.PopularViewModel
 import com.example.kinopoisk_test_app.util.MOVIE_ID
 import com.example.kinopoisk_test_app.util.debounce
+import com.google.android.material.snackbar.Snackbar
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class PopularFragment : Fragment() {
@@ -48,13 +48,23 @@ class PopularFragment : Fragment() {
         viewModel.screenState.observe(viewLifecycleOwner) {
             updateScreen(it)
         }
+        viewModel.favoriteNotificationState.observe(viewLifecycleOwner) {
+            showNotification(it)
+        }
         setClickDebounce()
         bind()
         viewModel.getPopularMovies()
     }
 
+    private fun showNotification(message: Int) {
+        Snackbar.make(
+            binding.root,
+            message,
+            Snackbar.LENGTH_SHORT
+        ).show()
+    }
+
     private fun onMovieLongClick(movie: Movie): Boolean {
-        Log.d("WTF fragment", movie.description)
         viewModel.saveMovieToDb(movie)
         return true
     }
