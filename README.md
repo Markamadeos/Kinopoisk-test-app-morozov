@@ -8,6 +8,7 @@
 
 # APK
 Скачать APK,  можно -> [тут](https://github.com/Markamadeos/Kinopoisk-test-app-morozov/actions/runs/7863421846/artifacts/1236710509)
+
 Либо можно перейти на чеки последнего коммита по зеленой галочке и скачать оттуда в разделе Summary.
 Это дебаг билд, который собрал github Actions.
 
