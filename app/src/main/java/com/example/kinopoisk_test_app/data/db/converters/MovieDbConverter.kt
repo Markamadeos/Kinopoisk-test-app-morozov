@@ -26,7 +26,8 @@ class MovieDbConverter {
             year = movie.year,
             description = movie.description,
             countries = movie.countries,
-            genres = movie.genres
+            genres = movie.genres,
+            isFavorite = true
         )
     }
 }

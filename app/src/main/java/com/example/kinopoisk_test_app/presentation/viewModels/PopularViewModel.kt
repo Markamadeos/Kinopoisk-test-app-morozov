@@ -28,13 +28,12 @@ class PopularViewModel(
     private var searchJob: Job? = null
     private var currentQuery = EMPTY_QUERY
 
-
     fun getPopularMovies() {
         if (screenState.value is PopularScreenState.Content) {
             return
         }
         _screenState.postValue(PopularScreenState.Loading)
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             searchInteractor.getPopularMovies().collect { result ->
                 processingResult(result)
             }
@@ -43,7 +42,7 @@ class PopularViewModel(
 
     fun searchMovies(query: String) {
         _screenState.postValue(PopularScreenState.Loading)
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             searchInteractor.searchMovies(query).collect { result ->
                 processingResult(result)
             }

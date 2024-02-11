@@ -1,6 +1,7 @@
 package com.example.kinopoisk_test_app.data.network.impl
 
 import com.example.kinopoisk_test_app.R
+import com.example.kinopoisk_test_app.data.db.AppDataBase
 import com.example.kinopoisk_test_app.data.network.NetworkClient
 import com.example.kinopoisk_test_app.data.network.converters.MovieDtoConverter
 import com.example.kinopoisk_test_app.data.network.dto.requests.MovieRequest
@@ -11,13 +12,15 @@ import com.example.kinopoisk_test_app.domian.models.Movie
 import com.example.kinopoisk_test_app.domian.models.SearchResultData
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.withContext
 import retrofit2.HttpException
 import java.net.ConnectException
 import java.net.SocketTimeoutException
 
 class SearchRepositoryImpl(
     private val networkClient: NetworkClient,
-    private val converter: MovieDtoConverter
+    private val converter: MovieDtoConverter,
+    private val appDataBase: AppDataBase
 ) : SearchRepository {
     override suspend fun getPopularMovies(): Flow<SearchResultData<List<Movie>>> = flow {
         val searchResult = networkClient.getAllMovies()
@@ -96,7 +99,17 @@ class SearchRepositoryImpl(
         }
     }
 
-    private fun convertFromMovieDto(moviesDto: List<MovieResponseDto>): List<Movie> {
-        return moviesDto.map { movieResponseDto -> converter.map(movieResponseDto) }
+    private suspend fun convertFromMovieDto(moviesDto: List<MovieResponseDto>): List<Movie> {
+        return moviesDto.map { movieResponseDto ->
+            (converter.map(movieResponseDto)).copy(
+                isFavorite = checkInFavorites(
+                    movieResponseDto.id
+                )
+            )
+        }
+    }
+
+    private suspend fun checkInFavorites(id: String): Boolean {
+        return appDataBase.movieDao().getIds().contains(id)
     }
 }
