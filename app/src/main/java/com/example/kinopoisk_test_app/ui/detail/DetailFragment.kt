@@ -8,7 +8,6 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.example.kinopoisk_test_app.R
 import com.example.kinopoisk_test_app.databinding.FragmentDetailBinding
 import com.example.kinopoisk_test_app.domian.models.Movie
@@ -79,15 +78,14 @@ class DetailFragment : Fragment() {
             ivCover.isVisible = true
             tvInternetError.isVisible = false
             ivInternetError.isVisible = false
-            pbLoading.isVisible = false
-
             tvMovieTitle.text = movie.name
             tvDescription.text = movie.description
             tvCountryValue.text = movie.countries
             tvGenreValue.text = movie.genres
+            pbLoading.isVisible = true
             Glide.with(requireContext())
                 .load(movie.cover)
-                .transform(CenterCrop())
+                .fitCenter()
                 .into(ivCover)
         }
     }
