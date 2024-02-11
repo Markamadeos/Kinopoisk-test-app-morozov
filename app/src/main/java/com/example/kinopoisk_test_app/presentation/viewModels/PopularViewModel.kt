@@ -89,11 +89,19 @@ class PopularViewModel(
             if (favoriteInteractor.isMovieInFavorites(movie.id)) {
                 _favoriteNotificationSate.postValue(R.string.already_in_favorites)
             } else {
-                val fullInfoMovie =
-                    (searchInteractor.getMovieById(movie.id)
-                        .first() as SearchResultData.Data).value!!
-                favoriteInteractor.saveMovieToDb(fullInfoMovie)
-                _favoriteNotificationSate.postValue(R.string.added_to_favorites)
+                var fullMovieInfo: Movie? = null
+                try {
+                    fullMovieInfo =
+                        (searchInteractor.getMovieById(movie.id)
+                            .first() as SearchResultData.Data).value!!
+                } catch (_: Throwable) {
+                }
+                if (fullMovieInfo == null) {
+                    _favoriteNotificationSate.postValue(R.string.add_to_favorite_error)
+                } else {
+                    favoriteInteractor.saveMovieToDb(fullMovieInfo)
+                    _favoriteNotificationSate.postValue(R.string.added_to_favorites)
+                }
             }
         }
     }
