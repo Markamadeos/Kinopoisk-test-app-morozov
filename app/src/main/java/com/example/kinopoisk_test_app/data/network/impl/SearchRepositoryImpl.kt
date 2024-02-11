@@ -25,7 +25,11 @@ class SearchRepositoryImpl(
         val error = searchResult.exceptionOrNull()
         when {
             data?.items != null -> {
-                emit(SearchResultData.Data(convertFromMovieDto(data.items)))
+                if (data.items.isEmpty()) {
+                    emit(SearchResultData.Empty(R.string.server_error))
+                } else {
+                    emit(SearchResultData.Data(convertFromMovieDto(data.items)))
+                }
             }
 
             error is ConnectException -> {
@@ -71,7 +75,11 @@ class SearchRepositoryImpl(
         val error = searchResult.exceptionOrNull()
         when {
             data?.items != null -> {
-                emit(SearchResultData.Data(convertFromMovieDto(data.items)))
+                if (data.items.isEmpty()) {
+                    emit(SearchResultData.Empty(R.string.server_error))
+                } else {
+                    emit(SearchResultData.Data(convertFromMovieDto(data.items)))
+                }
             }
 
             error is ConnectException -> {
