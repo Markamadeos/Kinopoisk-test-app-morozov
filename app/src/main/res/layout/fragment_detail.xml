@@ -21,10 +21,11 @@
 
         <ImageView
             android:id="@+id/btn_back"
-            android:layout_width="@dimen/_24dp"
-            android:layout_height="@dimen/_24dp"
+            android:layout_width="@dimen/_32dp"
+            android:layout_height="@dimen/_32dp"
             android:layout_marginStart="@dimen/_16dp"
             android:layout_marginTop="@dimen/_29dp"
+            android:padding="@dimen/_4dp"
             android:src="@drawable/ic_arrow_back"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

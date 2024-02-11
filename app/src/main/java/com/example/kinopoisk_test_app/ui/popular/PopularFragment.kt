@@ -18,6 +18,8 @@ import com.example.kinopoisk_test_app.presentation.models.PopularScreenState
 import com.example.kinopoisk_test_app.presentation.viewModels.PopularViewModel
 import com.example.kinopoisk_test_app.util.MOVIE_ID
 import com.example.kinopoisk_test_app.util.debounce
+import com.example.kinopoisk_test_app.util.hideKeyboard
+import com.example.kinopoisk_test_app.util.showKeyboard
 import com.google.android.material.snackbar.Snackbar
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -87,6 +89,7 @@ class PopularFragment : Fragment() {
                 btnSearch.isVisible = false
                 btnBack.isVisible = true
                 etSearchQuery.requestFocus()
+                showKeyboard()
             }
             btnInternetError.setOnClickListener {
                 if (currentQuery.isEmpty()) {
@@ -161,6 +164,7 @@ class PopularFragment : Fragment() {
 
     private fun showContent(movies: List<Movie>) {
         with(binding) {
+            hideKeyboard()
             pbLoading.isVisible = false
             tvInternetError.isVisible = false
             tvServerError.isVisible = false
