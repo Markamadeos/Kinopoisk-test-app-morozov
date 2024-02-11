@@ -10,16 +10,8 @@ fun Fragment.hideKeyboard() {
     view?.let { activity?.hideKeyboard(it) }
 }
 
-fun Activity.hideKeyboard() {
-    hideKeyboard(currentFocus ?: View(this))
-}
-
 fun Fragment.showKeyboard() {
     view?.let { activity?.showKeyboard(it) }
-}
-
-fun Activity.showKeyboard() {
-    showKeyboard(currentFocus ?: View(this))
 }
 
 private fun Context.hideKeyboard(view: View) {
