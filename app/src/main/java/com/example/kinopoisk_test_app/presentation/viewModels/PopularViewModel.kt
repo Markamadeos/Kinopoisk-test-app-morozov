@@ -25,6 +25,9 @@ class PopularViewModel(
 
 
     fun getPopularMovies() {
+        if (screenState.value is PopularScreenState.Content) {
+            return
+        }
         _screenState.postValue(PopularScreenState.Loading)
         viewModelScope.launch {
             searchInteractor.getPopularMovies().collect { result ->
