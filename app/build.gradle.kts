@@ -60,4 +60,8 @@ dependencies {
     implementation("androidx.room:room-ktx:2.6.1")
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+
+    // dagger
+    implementation("com.google.dagger:dagger:2.28.3")
+    implementation("com.google.dagger:dagger-compiler:2.28.3")
 }
